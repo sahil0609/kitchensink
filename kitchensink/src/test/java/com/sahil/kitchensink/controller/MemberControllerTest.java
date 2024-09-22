@@ -80,7 +80,7 @@ class MemberControllerTest {
         void deleteAllMembers_DeletesAllMembers_WhenUserIsAdmin() throws Exception {
 
             Assertions.assertEquals(2, memberRepository.findAll().size());
-            mockMvc.perform(delete("/members/v1/deleteAll"))
+            mockMvc.perform(delete("/members/v1"))
                     .andExpect(status().isOk());
 
             Assertions.assertTrue(memberRepository.findAll().isEmpty());
@@ -188,7 +188,7 @@ class MemberControllerTest {
 
         @Test
         void DeleteALl_ThrowsUnAuthorized_WhenUserIsNotAdmin() throws Exception {
-            mockMvc.perform(delete("/members/v1/deleteAll"))
+            mockMvc.perform(delete("/members/v1"))
                     .andExpect(status().isForbidden());
         }
 

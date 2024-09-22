@@ -15,3 +15,7 @@ security:
 admin:
   email: admin@gmail.com
   password: admin
+
+cors:
+  allowedOrigins:
+    - http://localhost:3000

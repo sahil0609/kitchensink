@@ -6,7 +6,6 @@ import com.sahil.kitchensink.model.markers.generalMemberCheck;
 import com.sahil.kitchensink.validations.UniqueMemberEmail;
 import com.sahil.kitchensink.validations.UpdateMemberUniqunessConstraint;
 import jakarta.validation.constraints.*;
-import lombok.Builder;
 import lombok.Data;
 
 @Data

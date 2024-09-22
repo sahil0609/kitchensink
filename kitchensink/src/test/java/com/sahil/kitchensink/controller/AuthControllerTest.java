@@ -5,7 +5,6 @@ import com.sahil.kitchensink.enums.Roles;
 import com.sahil.kitchensink.model.User;
 import com.sahil.kitchensink.model.UserDTO;
 import com.sahil.kitchensink.repository.UserRespository;
-import com.sahil.kitchensink.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +24,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

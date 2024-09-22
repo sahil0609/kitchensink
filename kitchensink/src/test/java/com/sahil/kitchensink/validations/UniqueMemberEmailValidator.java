@@ -2,7 +2,7 @@ package com.sahil.kitchensink.validations;
 
 import com.sahil.kitchensink.model.Member;
 import com.sahil.kitchensink.model.MemberDTO;
-import com.sahil.kitchensink.repository.MemberRepository;
+import com.sahil.kitchensink.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,13 +11,15 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 class UniqueMemberEmailValidatorTest {
 
     @Mock
-    private MemberRepository memberRepository;
+    private MemberService memberService;
+
 
     @InjectMocks
     private UniqueMemberEmailValidator uniqueMemberEmailValidator;
@@ -32,7 +34,7 @@ class UniqueMemberEmailValidatorTest {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setEmail("unique@example.com");
 
-        when(memberRepository.findByEmail(memberDTO.getEmail())).thenReturn(Optional.empty());
+        when(memberService.findMemberByEmail(memberDTO.getEmail())).thenReturn(Optional.empty());
 
         boolean result = uniqueMemberEmailValidator.isValid(memberDTO, null);
 
@@ -44,7 +46,7 @@ class UniqueMemberEmailValidatorTest {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setEmail("existing@example.com");
 
-        when(memberRepository.findByEmail(memberDTO.getEmail())).thenReturn(Optional.of(new Member()));
+        when(memberService.findMemberByEmail(memberDTO.getEmail())).thenReturn(Optional.of(new Member()));
 
         boolean result = uniqueMemberEmailValidator.isValid(memberDTO, null);
 

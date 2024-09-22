@@ -67,7 +67,7 @@ class TokenServiceTest {
     }
 
     @Nested
-    public class TestExpiredtoken {
+    class TestExpiredtoken {
 
         @BeforeEach
         public void setup() {
@@ -86,24 +86,17 @@ class TokenServiceTest {
             assertThrows(ExpiredJwtException.class, () -> tokenService.isTokenValid(token, userDetails));
 
         }
+
+        @Test
+        void isTokenValid_ReturnsFalse_whenTokenExpiredAndWrongUserName() {
+            when(userDetails.getUsername()).thenReturn("testUser");
+            when(userDetails.getAuthorities()).thenReturn(Collections.emptyList());
+            String token = tokenService.generateToken(userDetails);
+            when(userDetails.getUsername()).thenReturn("wronguser");
+            //change the expiration time of the token
+            assertThrows(ExpiredJwtException.class, () -> tokenService.isTokenValid(token, userDetails));
+        }
     }
-
-    @Test
-    void isTokenValid_ReturnsFalse_WhentokenExpired() {
-        //setting expiration time as immeditate
-        //setup
-        ReflectionTestUtils.setField(tokenService, "jwtExpiration", 0);
-
-        when(userDetails.getUsername()).thenReturn("testUser");
-        when(userDetails.getAuthorities()).thenReturn(Collections.emptyList());
-        String token = tokenService.generateToken(userDetails);
-        //change the expiration time of the token
-        assertThrows(ExpiredJwtException.class, () -> tokenService.isTokenValid(token, userDetails));
-
-        //cleanup
-        ReflectionTestUtils.setField(tokenService, "jwtExpiration", 360000);
-    }
-
 
     @Test
     void extractClaim_ReturnsCorrectClaim() {

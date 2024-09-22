@@ -3,20 +3,20 @@ package com.sahil.kitchensink.validations;
 import com.sahil.kitchensink.model.User;
 import com.sahil.kitchensink.model.UserDTO;
 import com.sahil.kitchensink.repository.UserRespository;
-import com.sahil.kitchensink.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 
 @Component
+@RequiredArgsConstructor
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, UserDTO> {
 
-    @Autowired
-    private UserRespository userRespository;
+
+    private final UserRespository userRespository;
 
     @Override
     public boolean isValid(UserDTO userDTO, ConstraintValidatorContext constraintValidatorContext) {

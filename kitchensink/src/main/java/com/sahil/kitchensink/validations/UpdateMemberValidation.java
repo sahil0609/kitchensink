@@ -2,7 +2,6 @@ package com.sahil.kitchensink.validations;
 
 import com.sahil.kitchensink.model.Member;
 import com.sahil.kitchensink.model.MemberDTO;
-import com.sahil.kitchensink.repository.MemberRepository;
 import com.sahil.kitchensink.service.MemberService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

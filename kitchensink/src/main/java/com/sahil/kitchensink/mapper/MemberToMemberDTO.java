@@ -2,7 +2,9 @@ package com.sahil.kitchensink.mapper;
 
 import com.sahil.kitchensink.model.Member;
 import com.sahil.kitchensink.model.MemberDTO;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class MemberToMemberDTO {
 
     public static MemberDTO map(Member member) {
