@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: kitchen sink
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:27017/
+      database: kitchen_sink
+      auto-index-creation: true
+
+security:
+  jwt:
+    secretKey: dGhpcyBzZWNyZXQga2V5IHNob3VsZCBiZSBhIHZlcnkgbGFyZ2Ugc3RyaW5nIHRoYXQgaXMgbm90IGVhc3kgdG8gZ3Vlc3Mgb3RoZXJ3aXNlIHlvdSB3aWxsIGJlIGhhY2tlZA==
+    expirationTime: 86400000
+
+admin:
+  email: admin@gmail.com
+  password: admin
