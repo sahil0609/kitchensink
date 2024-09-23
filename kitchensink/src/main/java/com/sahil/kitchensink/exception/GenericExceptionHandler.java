@@ -27,7 +27,7 @@ public class GenericExceptionHandler {
     @ExceptionHandler(MemberNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleMemberNotFoundException(MemberNotFoundException e) {
-        log.error("Exception occurred: ", e);
+        log.error("Member not found: ", e);
     }
 
     @ExceptionHandler(AuthenticationException.class)
@@ -49,6 +49,8 @@ public class GenericExceptionHandler {
             errorMessage.add(errors.getDefaultMessage());
         }
         data.setMessage(errorMessage);
+        data.setCode("inputError.invalid");
+        data.setRetryable(false);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(data);
     }
 

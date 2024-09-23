@@ -4,6 +4,7 @@ import com.sahil.kitchensink.enums.Roles;
 import com.sahil.kitchensink.model.User;
 import com.sahil.kitchensink.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class AdminCreater {
 
     private final PasswordEncoder encoder;
@@ -36,6 +38,7 @@ public class AdminCreater {
                 .authorityList(List.of(new SimpleGrantedAuthority(Roles.ADMIN.getValue())))
                 .build();
 
+        log.info("Creating admin user with email: {}", adminEmail);
         userService.saveUser(user);
     }
 }

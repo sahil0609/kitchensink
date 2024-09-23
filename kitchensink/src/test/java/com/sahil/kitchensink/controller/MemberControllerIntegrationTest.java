@@ -1,6 +1,7 @@
 package com.sahil.kitchensink.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sahil.kitchensink.BaseIntegrationTest;
 import com.sahil.kitchensink.model.Member;
 import com.sahil.kitchensink.model.MemberDTO;
 import com.sahil.kitchensink.repository.MemberRepository;
@@ -29,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureDataMongo
-class MemberControllerTest {
+public class MemberControllerIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;

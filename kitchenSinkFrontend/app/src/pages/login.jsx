@@ -51,6 +51,7 @@ const Signup = () => {
             }
     })
         .catch((error) => {
+            setErrorData('Some errror occured');
             console.error('Error:', error);
         });
         

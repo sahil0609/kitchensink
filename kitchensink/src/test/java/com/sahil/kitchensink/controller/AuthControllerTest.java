@@ -26,6 +26,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -88,6 +89,19 @@ class AuthControllerTest {
     }
 
     @Test
+    void register_when_mongodb_is_down() throws Exception {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail("test@example.com");
+        userDTO.setPassword("Password1A");
+
+        when(userRespository.findById(any())).thenThrow(new RuntimeException("MongoDB is down"));
+
+        mockMvc.perform(post("/auth/v1/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userDTO)))
+                .andExpect(status().is5xxServerError());
+    }
+    @Test
     void register_CreatesUser_WhenDataIsValid() throws Exception {
         String email = "test@example.com";
         UserDTO userDTO = new UserDTO();
@@ -103,7 +117,7 @@ class AuthControllerTest {
         verify(userRespository).save(userCapture.capture());
         assertTrue(passwordEncoder.matches(userDTO.getPassword(), userCapture.getValue().getPassword()));
         assertTrue(userCapture.getValue().getUsername().matches(email));
-        assertEquals(userCapture.getValue().getAuthorities().size(), 1);
+        assertEquals(1, userCapture.getValue().getAuthorities().size());
     }
 
     @ParameterizedTest
